@@ -1,0 +1,101 @@
+django rest framework
+git@github.com:yoratyo/django_rest_api.git
+-----------------------
+
+install django:
+pip install Django
+
+install django rest framework:
+pip install djangorestframework
+pip install markdown       # Markdown support for the browsable API.
+pip install django-filter  # Filtering support
+
+create django project:
+django-admin startproject django_rest_api
+
+migrate auth: (default to sqlite)
+python manage.py migrate
+
+create superuser:
+python manage.py createsuperuser
+
+create app:
+python manage.py startapp products
+
+add installed app on project settings.py
+'rest_framework',
+'products',
+
+add urls on app and add on project urls:
+
+add model on app:
+
+make migration:
+python manage.py makemigrations
+
+migrate:
+python manage.py migrate
+
+add model in admin app:
+from .models import Product
+admin.site.register(Product)
+
+run server:
+python manage.py runserver
+
+**********************************
+Add serializer:
+To convert querysets or model instances to python data type that can be render to content type (JSON,XMl,TEXT)
+create serializers.py on app
+
+create modelViewSet class on views.py app:
+
+Run Server Again!:
+-------------------------------------------------
+
+Relation data
+------------
+
+add others model:
+
+add serializers for other model:
+
+add view for other model:
+
+register new view on urls:
+
+**************************************8
+
+Add Permission / Basic Auth
+--------------------
+
+add url in project:
+path('api-auth', include('rest_framework.urls'))
+
+import permission on views.py on app: (if want to auth each entity)
+
+add default permission on settings.py on project (for all entity):
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.IsAuthenticatedOrReadOnly',)
+}
+
+***************************************
+
+Add JSON Web Token
+---------------
+
+install simple JWT:
+pip install djangorestframework_simplejwt
+
+update settings.py:
+'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+
+modify urls project:
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+path('api/token/', TokenObtainPairView.as_view()),
+path('api/token/refresh/', TokenRefreshView.as_view()),
+
+
+
+
+
